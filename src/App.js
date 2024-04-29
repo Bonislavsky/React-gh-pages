@@ -1,15 +1,18 @@
 import "react-grid-layout/css/styles.css";
 import "react-resizable/css/styles.css";
 import GridLayout from 'react-grid-layout';
-import React, { useState } from 'react';
+import React, { } from 'react';
 import ColorPicker from "./Components/ColorPicker";
 import Canvas from "./Components/Canvas";
 import Context from "./Components/Context";
 import LayersList from "./Components/LayersList";
+import CustomPalette from "./Components/CustomPalette";
+import WholePicture from "./Components/WholePicture";
+import ButtonsList from "./Components/ButtonsList";
 
 
 function App() {
-  const availableHandles = ["s", "w", "e", "n", "sw", "nw", "se", "ne"];
+  // const availableHandles = ["s", "w", "e", "n", "sw", "nw", "se", "ne"];
   const layoutConfig = [
     { i: 'buttons', x: 0, y: 0, w: 10, h: 1, static: true },
     { i: 'wholePicture', x: 10, y: 0, w: 2, h: 5, static: true },
@@ -25,8 +28,6 @@ function App() {
   
   const modernStyle = {
     display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
     background: "rgb(160, 160, 160)",
     height: "100vh", 
     flexDirection: 'column',
@@ -36,13 +37,13 @@ function App() {
   return (
     <div className="App">
       <Context>
-        <GridLayout className="example-layout" layout={layoutConfig} cols={12} rowHeight={30} width={window.innerWidth-15}>
-          <div key="buttons" style={modernStyle}>кнопки</div>
-          <div key="wholePicture" style={modernStyle}>целый рисунок</div>
+      <GridLayout className="example-layout" layout={layoutConfig} cols={12} rowHeight={30} width={window.innerWidth-15}>
+          <div key="buttons" style={modernStyle}><ButtonsList/></div>
+          <div key="wholePicture" style={modernStyle}><WholePicture/></div>
           <div key="palette" style={modernStyle}><ColorPicker/></div>
           <div key="canvas" style={modernStyle}><Canvas/></div>
           <div key="canvas settings" style={modernStyle}>настройки холста</div>
-          <div key="custom palette" style={modernStyle}>кастомная палитра</div>     
+          <div key="custom palette" style={modernStyle}><CustomPalette/></div>     
           <div key="brushes" style={modernStyle}>кисти</div>
           <div key="list_layers" style={modernStyle}><LayersList/></div>
           <div key="frame-by-frame_motion" style={modernStyle}>пошаговая анимация</div>

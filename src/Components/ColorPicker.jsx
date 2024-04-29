@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { CursorContext } from "./Context";
+import { MyContext } from "./Context";
 
 const colorsArray = [
   "#f0f8ff", // aliceblue
@@ -151,7 +151,7 @@ const colorsArray = [
 
 const ColorPicker = () => {  
 
-  const cursor = useContext(CursorContext);
+  const { UpdateColor} = useContext(MyContext);
 
   return (
     <div style={{ display: 'flex', flexWrap: 'wrap' }}>
@@ -163,9 +163,12 @@ const ColorPicker = () => {
             height: '22px',
             backgroundColor: color,
             margin: '1px',
-            cursor: 'pointer', // Добавлен стиль указывающий на курсор
+            cursor: 'pointer',
           }}
-          onClick={() => cursor.UpdateColor(color)}
+          onClick={() => 
+            {
+              UpdateColor(color);
+            }}
         ></div>
       ))}
     </div>

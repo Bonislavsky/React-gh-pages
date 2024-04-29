@@ -4,7 +4,7 @@ import MyButton from './UI/MyButton';
 const Layer = (props) => {
 
     return(
-        <div className="layer">
+        <div className="layer" onClick={() => props.activeLayer(props.layer.id)}>
             <div>
                 {props.layer.name}
             </div>
