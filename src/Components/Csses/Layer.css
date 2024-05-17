@@ -1,0 +1,13 @@
+.layer{
+    background-color: #bccbc7;
+    padding: 10px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    box-shadow: 1px 1px 1px rgb(16, 15, 15);
+
+    margin-bottom: 3px;
+    border: 1px solid #f6f6f6; 
+}

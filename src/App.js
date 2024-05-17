@@ -2,13 +2,14 @@ import "react-grid-layout/css/styles.css";
 import "react-resizable/css/styles.css";
 import GridLayout from 'react-grid-layout';
 import React, { } from 'react';
-import ColorPicker from "./Components/ColorPicker";
+import ColorPalette from "./Components/ColorPalette";
 import Canvas from "./Components/Canvas";
 import Context from "./Components/Context";
 import LayersList from "./Components/LayersList";
 import CustomPalette from "./Components/CustomPalette";
 import WholePicture from "./Components/WholePicture";
 import ButtonsList from "./Components/ButtonsList";
+import './App.css';
 
 
 function App() {
@@ -16,38 +17,26 @@ function App() {
   const layoutConfig = [
     { i: 'buttons', x: 0, y: 0, w: 10, h: 1, static: true },
     { i: 'wholePicture', x: 10, y: 0, w: 2, h: 5, static: true },
-    { i: 'palette', x: 0, y: 1, w: 2, h: 8, static: true },
-    { i: 'custom palette', x: 0, y: 9, w: 2, h: 6, static: true },   
-    { i: 'canvas', x: 2, y: 1, w: 8, h: 18, static: true },
-    { i: 'canvas settings', x: 10, y: 5, w: 2, h: 5, static: true },
-    { i: 'brushes', x: 0, y: 15, w: 2, h: 6, static: true },
-    { i: 'list_layers', x: 10, y: 10, w: 2, h: 11, static: true },
-    { i: 'frame-by-frame_motion', x: 2, y: 19, w: 8, h: 2, static: true },
-    { i: 'xpen1', x: 0, y: 21, w: 12, h: 1, static: true }
+    { i: 'palette', x: 0, y: 1, w: 2, h: 10, static: true },
+    { i: 'canvas', x: 2, y: 1, w: 8, h: 21, static: true },
+    { i: 'custom palette', x: 0, y: 11, w: 2, h: 6, static: true },   
+    { i: 'brushInfo', x: 0, y: 17, w: 2, h: 8, static: true },
+    { i: 'list_layers', x: 10, y: 5, w: 2, h: 21, static: true },
+    { i: 'frame-by-frame_motion', x: 2, y: 22, w: 8, h: 4, static: true },
   ];
   
-  const modernStyle = {
-    display: "flex",
-    background: "rgb(160, 160, 160)",
-    height: "100vh", 
-    flexDirection: 'column',
-    gap: '10px',
-  }
-
   return (
-    <div className="App">
+    <div className="app">
       <Context>
-      <GridLayout className="example-layout" layout={layoutConfig} cols={12} rowHeight={30} width={window.innerWidth-15}>
-          <div key="buttons" style={modernStyle}><ButtonsList/></div>
-          <div key="wholePicture" style={modernStyle}><WholePicture/></div>
-          <div key="palette" style={modernStyle}><ColorPicker/></div>
-          <div key="canvas" style={modernStyle}><Canvas/></div>
-          <div key="canvas settings" style={modernStyle}>настройки холста</div>
-          <div key="custom palette" style={modernStyle}><CustomPalette/></div>     
-          <div key="brushes" style={modernStyle}>кисти</div>
-          <div key="list_layers" style={modernStyle}><LayersList/></div>
-          <div key="frame-by-frame_motion" style={modernStyle}>пошаговая анимация</div>
-          <div key="xpen1" style={modernStyle}>пхрень снизу </div>
+      <GridLayout className="example-layout" layout={layoutConfig} cols={12} rowHeight={30} width={window.innerWidth} margin = {[5, 5]}>
+          <div key="buttons" className="grid_block"><ButtonsList/></div>
+          <div key="wholePicture" className="grid_block"><WholePicture/></div>
+          <div key="palette" className="grid_block"><ColorPalette/></div>
+          <div key="canvas" className="grid_block"><Canvas/></div>
+          <div key="custom palette" className="grid_block"><CustomPalette/></div>     
+          <div key="brushInfo" className="grid_block">информация о кисти</div>
+          <div key="list_layers" className="grid_block"><LayersList/></div>
+          <div key="frame-by-frame_motion" className="grid_block">пошаговая анимация</div>
         </GridLayout>
       </Context>
     </div>

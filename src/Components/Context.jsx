@@ -11,13 +11,15 @@ const Context = (props) =>{
         {
             id: uuidv4(),
             name: `layer 1`,
+            index : 1,
             isCurrent : true,
             listCoordinates : []
         }]);
     
     const GetPreviousClick = () => {
+      if(click.length === 0){console.log("кликов нет"); return;};
       const currentIndex = click.findIndex(item => item.isCurrent);
-      if(currentIndex === -1){console.log("ошибка: текущий клик не найден")};
+      if(currentIndex === -1){console.log("ошибка: текущий клик не найден"); return;};
       
       console.log(currentIndex);
       if(currentIndex > 0){
@@ -81,26 +83,61 @@ const Context = (props) =>{
     }      
 
     const CreateLayer = () => {
-        const newLayer = {
-            id: uuidv4(),
-            name: `layer ${layers.length + 1}`,
-            listCoordinates: [],
-            isCurrent: false
-        };
 
-        setLayer([...layers, newLayer])
+      let newIndex = 1;
+      let isCurrent = true;
+      if(layers.length !== 0){
+        const highestIndexLayer = layers.reduce((prevLayer, currentLayer) => {
+          return (prevLayer.index > currentLayer.index) ? prevLayer : currentLayer;
+        });
+
+        newIndex = highestIndexLayer.index + 1;
+        isCurrent = false
+      }
+
+      const newLayer = {
+        id: uuidv4(),
+        name: `layer ${layers.length + 1}`,
+        index: newIndex,
+        isCurrent: isCurrent,
+        listCoordinates: [],
+      };
+
+      setLayer([...layers, newLayer]);
+
     };
       
     const RemoveLayer = (deleteLayer) => {
-        setLayer(layers.filter(p => p.id !== deleteLayer.id))
+      if(!deleteLayer.isCurrent || layers.length === 1)
+      {      
+        setLayer(layers.filter(p => p.id !== deleteLayer.id));
+        return;
+      }
+   
+      const indToDelete = layers.findIndex(item => item.isCurrent);
+      if(indToDelete <= -1){console.log('ошибка: не находится выбранный слой'); return;}
+
+      if(layers.length !== 0)
+      {
+        const nextInd = indToDelete === 0 ? indToDelete + 1 : indToDelete - 1;
+
+        const updatedLayers = [...layers]; 
+        updatedLayers[nextInd].isCurrent = true; 
+
+        setLayer(updatedLayers.filter(p => p.id !== deleteLayer.id));
+      }
     };
 
-    const SetActiveLayer = (layerId) => {
-        const updatedLayers = layers.map(layer => {
-            if (layer.id === layerId) {return { ...layer, isCurrent: true };} 
-            else                      {return { ...layer, isCurrent: false };}
-        });
-        setLayer(updatedLayers);
+    const SetActiveLayer = (layer) => {
+      if(layer.isCurrent) {return;}
+      const indNewLay = layers.findIndex(item => item.id == layer.id);
+      const indCurrent = layers.findIndex(item => item.isCurrent);
+
+      const updatedLayers = [...layers]; 
+      updatedLayers[indNewLay].isCurrent = true; 
+      updatedLayers[indCurrent].isCurrent = false; 
+        
+      setLayer(updatedLayers);
     };
 
     const AddCoordinateColor = (layerId, rowInd, colInd, newColor) => {
@@ -131,6 +168,7 @@ const Context = (props) =>{
     const value = { 
         cursor, 
         layers,
+        click,
 
         UpdateColor,
 

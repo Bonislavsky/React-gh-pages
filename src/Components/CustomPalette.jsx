@@ -6,7 +6,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 const CustomPalette = () => {  
 
-    const { cursor, UpdateColor } = useContext(MyContext);
+    const { cursor, click, UpdateColor } = useContext(MyContext);
     const [isWatchingColor, setIsWatchingColor] = useState(true);
     const [palette, setPalette] = useState([]);
 
@@ -26,7 +26,7 @@ const CustomPalette = () => {
         if (isWatchingColor && !palette.some(item => item.color === cursor.color)) {
           addNewColorToPalatte(cursor.color);
         }
-    }, [cursor.color, isWatchingColor]);
+    }, [click, isWatchingColor]);
 
     const toggleWatchingColor = () => {
         setIsWatchingColor(prevState => !prevState);

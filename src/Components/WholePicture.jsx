@@ -3,11 +3,13 @@ import { MyContext } from "./Context";
 
 const WholePicture = (props) => {
   const { layers } = useContext(MyContext);
+  
   const blockSize = 12;
   const blockStyle = {
     width: blockSize,
     height: blockSize,
   };
+
 
   const renderGrid = () => {
     const currentLayer = layers.find((layer) => layer.isCurrent);
@@ -21,6 +23,7 @@ const WholePicture = (props) => {
           (coord) => coord.row === row && coord.col === col
         );
         const color = coordinate ? coordinate.color : "#ffffff";
+
         rowData.push(
           <div
             key={`${row}-${col}`}

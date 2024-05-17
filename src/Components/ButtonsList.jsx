@@ -36,12 +36,10 @@ const ButtonsList = (props) => {
     <div>
       <MyButton onClick={DownloadImagePNG}>
         <img src={pngImage} alt="png" style={{ width: '22px', height: '22px' }}/>
-        png
       </MyButton>
 
       <MyButton onClick={DownloadImageJPG}>
         <img src={jpgImage} alt="jpg" style={{ width: '22px', height: '22px' }}/>
-        jpg
       </MyButton>
 
       <MyButton onClick={() => GetPreviousClick()}>
